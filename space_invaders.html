@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Space Invaders</title>
+    <link rel="stylesheet" type="text/css" href="si_styles.css">
+  </head>
+  <body>
+    <div class="game"></div>
+
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+    </script>
+    <script src="js/si_view.js"></script>
+    <script src="js/si_game.js"></script>
+
+    <script>
+      $(function() {
+        new SI.View($(".game"));
+      });
+    </script>
+  </body>
+</html>

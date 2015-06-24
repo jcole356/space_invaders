@@ -1,0 +1,27 @@
+html, body, figure, figcaption, ul, li, h1 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  text-align: inherit;
+}
+
+.game {
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  display: block;
+  float: left;
+  border: 1px solid;
+  width: 39px;
+  height: 20px;
+  /* Shoudn't need this once you get going */
+  margin: 1px;
+}
