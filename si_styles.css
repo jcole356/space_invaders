@@ -24,7 +24,7 @@ li {
   height: 20px;
 }
 
-/* eventually the aliens will be a color and a different width than
+/* eventually the aliens will be a different width than
 the standard spaces */
 .alien {
   background-color: green;

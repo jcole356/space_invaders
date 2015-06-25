@@ -11,18 +11,30 @@
     this.render();
 
     //Need to set up an interval in here
+    this.intervalId = window.setInterval(
+      this.step.bind(this),
+      View.STEP_MILLIS
+    );
   };
+
+  View.STEP_MILLIS = 1000;
 
   View.prototype.render = function () {
     this.updateClasses(this.board.aliens, "alien");
   };
 
-  View.prototype.updateClasses = function(coords, className) {
+  View.prototype.step = function () {
+    this.board.aliens.forEach(function(alien) {
+      alien.move();
+    });
+    this.render();
+  };
+
+  View.prototype.updateClasses = function(aliens, className) {
     this.$li.filter("." + className).removeClass();
 
-    coords.forEach(function(coord){
-      var flatCoord = (coord[0] * this.board.width) + coord[1];
-      debugger;
+    aliens.forEach(function(alien){
+      var flatCoord = (alien.coord[0] * this.board.width) + alien.coord[1];
       this.$li.eq(flatCoord).addClass(className);
     }.bind(this));
   };
@@ -38,10 +50,6 @@
       html += "</ul>";
     }
     this.$el.html(html);
-    // This should find all of the li's
     this.$li = this.$el.find("li");
   };
-
-
-
 })();
