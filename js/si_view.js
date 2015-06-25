@@ -23,7 +23,12 @@
     this.updateClasses(this.board.aliens, "alien");
   };
 
+  // Need to toggel the direction for each alien  May want to make the
+  // direction a property of the board.
   View.prototype.step = function () {
+    if (this.board.alienAtEdge()) {
+        SI.Alien.toggleDirection();
+    }
     this.board.aliens.forEach(function(alien) {
       alien.move();
     });

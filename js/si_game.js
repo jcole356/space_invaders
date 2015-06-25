@@ -14,15 +14,21 @@
 
   // Having trouble deciding how to specify a starting direction
   Alien.prototype.move = function () {
-    var newCoord = this.coord[1] + (1 * this.dir);
-    if (newCoord === 0 || newCoord === 23) {
-      this.toggleDirection;
-    }
     this.coord[1] = this.coord[1] + (1 * this.dir);
   };
 
+
+  // Alien.prototype.reachedEdge = function (coord) {
+  //   if (coord < 0 || coord > 23) {
+  //     this.toggleDirection();
+  //   }
+  // };
+
+  // You can't toggle every time this happens
+  // Need to determine the left most alien and only toggle on this.
   Alien.prototype.toggleDirection = function () {
-    this.dir = dir * -1
+    // debugger;
+    this.dir = this.dir * -1;
   };
 
   // Should eventually have several different symbols for different
@@ -58,6 +64,18 @@
     }
 
     return grid;
+  };
+
+  // Lowest alien is 0 in second coord
+  // Highest alien is 23 in second coord
+  Board.prototype.alienAtEdge = function () {
+    var atEdge = false;
+    this.aliens.forEach(function(alien) {
+      if (alien.coord[1] === 0) {
+        atEdge = true;
+      }
+    });
+    return atEdge;
   };
 
   // Board.prototype.render = function () {
