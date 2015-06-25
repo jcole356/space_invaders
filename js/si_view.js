@@ -5,9 +5,7 @@
 
   var View = SI.View = function($el) {
     this.$el = $el;
-    // this.stepMillis = 1000;
-    // For troubleshooting
-    this.stepMillis = 100;
+    this.stepMillis = 1000;
     this.board = new SI.Board(23, 30);
     this.setupGrid();
     this.board.render();
@@ -18,6 +16,18 @@
       this.step.bind(this),
       this.stepMillis
     );
+
+    $(window).on("keydown", this.handleKeyEvent.bind(this));
+  };
+
+  View.KEYS = {
+    38: "Shoot",
+    37: -1,
+    39: 1
+  };
+
+  View.prototype.handleKeyEvent = function (event) {
+    this.board.ship.move(View.KEYS[event.keyCode]);
   };
 
   View.prototype.render = function () {
@@ -27,7 +37,6 @@
       alienCoords.push(alien.coord);
     })
     this.updateClasses(alienCoords, "alien");
-    // debugger;
     this.updateClasses(shipCoord, "ship");
   };
 

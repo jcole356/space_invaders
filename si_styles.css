@@ -27,6 +27,7 @@ li {
 
 /* eventually the aliens will be a different width than
 the standard spaces */
+/* May need a former ship class to keep formatting the same */
 .alien {
   background-color: green;
 }
