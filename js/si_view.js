@@ -5,7 +5,7 @@
 
   var View = SI.View = function($el) {
     this.$el = $el;
-    this.stepMillis = 1000;
+    this.stepMillis = 1500;
     this.board = new SI.Board(23, 30);
     this.setupGrid();
     this.board.render();
@@ -27,7 +27,11 @@
   };
 
   View.prototype.handleKeyEvent = function (event) {
-    this.board.ship.move(View.KEYS[event.keyCode]);
+    if (event.keyCode === 38) {
+      this.board.shoot();
+    } else if (event.keyCode === 37 || event.keyCode === 39) {
+      this.board.ship.move(View.KEYS[event.keyCode]);
+    }
   };
 
   View.prototype.render = function () {
@@ -40,7 +44,7 @@
     this.updateClasses(shipCoord, "ship");
   };
 
-  // Toggle direction the board if an alien is at a boundary.
+  // Toggle direction of the board if an alien is at a boundary.
   View.prototype.step = function () {
     if (this.board.alienAtEdge()) {
         this.board.toggleDirection();

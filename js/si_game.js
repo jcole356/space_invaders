@@ -111,12 +111,15 @@
   Ship.SYMBOL = "S";
 
   // Probably need to force a render on each move.
+  // Need to address why ship stops moving once it reaches right boundary
+
   Ship.prototype.move = function (dir) {
     var newCoord = this.coord[1] + (1 * dir);
     if (this.board.validPosition(newCoord)) {
       this.coord[1] = this.coord[1] + (1 * dir);
     }
+    window.view.render();
   };
 
-  
+
 })();
