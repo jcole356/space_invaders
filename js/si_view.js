@@ -5,7 +5,7 @@
 
   var View = SI.View = function($el) {
     this.$el = $el;
-    this.board = new SI.Board(23, 10);
+    this.board = new SI.Board(23, 20);
     this.setupGrid();
     this.board.render();
     this.render();
@@ -23,8 +23,7 @@
     this.updateClasses(this.board.aliens, "alien");
   };
 
-  // Need to toggel the direction for each alien  May want to make the
-  // direction a property of the board.
+  // Toggle direction the board if an alien is at a boundary.
   View.prototype.step = function () {
     if (this.board.alienAtEdge()) {
         this.board.toggleDirection();
@@ -32,6 +31,7 @@
     this.board.aliens.forEach(function(alien) {
       alien.move();
     });
+    this.board.downShift = 0;
     this.render();
   };
 

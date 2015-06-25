@@ -14,16 +14,9 @@
 
   // Having trouble deciding how to specify a starting direction
   Alien.prototype.move = function () {
+    this.coord[0] = this.coord[0] + this.board.downShift;
     this.coord[1] = this.coord[1] + (1 * this.board.dir);
   };
-
-
-  // Alien.prototype.reachedEdge = function (coord) {
-  //   if (coord < 0 || coord > 23) {
-  //     this.toggleDirection();
-  //   }
-  // };
-
 
   // Should eventually have several different symbols for different
   // aliens
@@ -34,6 +27,7 @@
     this.width = width;
     this.height = height;
     this.dir = -1;
+    this.downShift = 0;
     this.aliens = [];
     //Initalize the aliens
     for (var i = 0; i < 5; i++) {
@@ -86,6 +80,7 @@
   Board.prototype.toggleDirection = function () {
     // debugger;
     this.dir = this.dir * -1;
+    this.downShift = this.downShift + 1;
   };
 
   // Currently only validates the horizontal plane for moving accross
