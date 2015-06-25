@@ -7,7 +7,7 @@
     this.width = width;
     this.height = height;
   };
-
+  
   Board.prototype.blankGrid = function (width, height) {
     var grid = [];
 
