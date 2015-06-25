@@ -5,7 +5,7 @@
 
   var View = SI.View = function($el) {
     this.$el = $el;
-    this.board = new SI.Board(22, 10);
+    this.board = new SI.Board(23, 10);
     this.setupGrid();
 
     //Need to set up an interval in here

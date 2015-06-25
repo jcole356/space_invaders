@@ -7,7 +7,11 @@
     this.width = width;
     this.height = height;
   };
+
+  // Need to set the initial state of the invaders
   
+
+
   Board.prototype.blankGrid = function (width, height) {
     var grid = [];
 
