@@ -27,7 +27,7 @@
   // direction a property of the board.
   View.prototype.step = function () {
     if (this.board.alienAtEdge()) {
-        SI.Alien.toggleDirection();
+        this.board.toggleDirection();
     }
     this.board.aliens.forEach(function(alien) {
       alien.move();

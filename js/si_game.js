@@ -9,12 +9,12 @@
   var Alien = SI.Alien = function(coord, board) {
     this.coord = coord;
     this.board = board;
-    this.dir = -1;
+    // this.dir = -1;
   };
 
   // Having trouble deciding how to specify a starting direction
   Alien.prototype.move = function () {
-    this.coord[1] = this.coord[1] + (1 * this.dir);
+    this.coord[1] = this.coord[1] + (1 * this.board.dir);
   };
 
 
@@ -24,22 +24,16 @@
   //   }
   // };
 
-  // You can't toggle every time this happens
-  // Need to determine the left most alien and only toggle on this.
-  Alien.prototype.toggleDirection = function () {
-    // debugger;
-    this.dir = this.dir * -1;
-  };
 
   // Should eventually have several different symbols for different
   // aliens
   Alien.SYMBOL = "A";
-  Alien.START_DIRECTION = 1;
 
 
   var Board = SI.Board = function(width, height) {
     this.width = width;
     this.height = height;
+    this.dir = -1;
     this.aliens = [];
     //Initalize the aliens
     for (var i = 0; i < 5; i++) {
@@ -71,7 +65,7 @@
   Board.prototype.alienAtEdge = function () {
     var atEdge = false;
     this.aliens.forEach(function(alien) {
-      if (alien.coord[1] === 0) {
+      if (alien.coord[1] === 0 || alien.coord[1] === 22) {
         atEdge = true;
       }
     });
@@ -85,6 +79,13 @@
     this.aliens.forEach(function (alien) {
       grid[alien.coord[0]][alien.coord[1]] = Alien.SYMBOL;
     });
+  };
+
+  // You can't toggle every time this happens
+  // Need to determine the left most alien and only toggle on this.
+  Board.prototype.toggleDirection = function () {
+    // debugger;
+    this.dir = this.dir * -1;
   };
 
   // Currently only validates the horizontal plane for moving accross
