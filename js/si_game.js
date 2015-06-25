@@ -22,12 +22,12 @@
   // aliens
   Alien.SYMBOL = "A";
 
-
   var Board = SI.Board = function(width, height) {
     this.width = width;
     this.height = height;
     this.dir = -1;
     this.downShift = 0;
+    this.ship = new Ship([29, 0], this);
     this.aliens = [];
     //Initalize the aliens
     for (var i = 0; i < 5; i++) {
@@ -66,10 +66,21 @@
     return atEdge;
   };
 
+  Board.prototype.gameOver = function () {
+    var atBottom = false;
+    this.aliens.forEach(function(alien) {
+      if (alien.coord[0] === 29) {
+        atBottom = true;
+      }
+    });
+
+    return atBottom;
+  };
+
   // Board.prototype.render = function () {
   Board.prototype.render = function () {
     var grid = this.blankGrid(this.width, this.height);
-
+    grid[this.ship.coord[0]][this.ship.coord[1]] = Ship.SYMBOL;
     this.aliens.forEach(function (alien) {
       grid[alien.coord[0]][alien.coord[1]] = Alien.SYMBOL;
     });
@@ -78,7 +89,6 @@
   // You can't toggle every time this happens
   // Need to determine the left most alien and only toggle on this.
   Board.prototype.toggleDirection = function () {
-    // debugger;
     this.dir = this.dir * -1;
     this.downShift = this.downShift + 1;
   };
@@ -92,4 +102,11 @@
       return false;
     }
   };
+
+  var Ship = SI.Ship = function (coord, board) {
+    this.coord = coord;
+    this.board = board;
+  };
+
+  Ship.SYMBOL = "S";
 })();

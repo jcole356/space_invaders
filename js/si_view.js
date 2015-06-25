@@ -5,7 +5,10 @@
 
   var View = SI.View = function($el) {
     this.$el = $el;
-    this.board = new SI.Board(23, 20);
+    // this.stepMillis = 1000;
+    // For troubleshooting
+    this.stepMillis = 100;
+    this.board = new SI.Board(23, 30);
     this.setupGrid();
     this.board.render();
     this.render();
@@ -13,33 +16,46 @@
     //Need to set up an interval in here
     this.intervalId = window.setInterval(
       this.step.bind(this),
-      View.STEP_MILLIS
+      this.stepMillis
     );
   };
 
-  View.STEP_MILLIS = 1000;
-
   View.prototype.render = function () {
-    this.updateClasses(this.board.aliens, "alien");
+    var alienCoords = [];
+    var shipCoord = [this.board.ship.coord];
+    this.board.aliens.forEach(function (alien) {
+      alienCoords.push(alien.coord);
+    })
+    this.updateClasses(alienCoords, "alien");
+    // debugger;
+    this.updateClasses(shipCoord, "ship");
   };
 
   // Toggle direction the board if an alien is at a boundary.
   View.prototype.step = function () {
     if (this.board.alienAtEdge()) {
         this.board.toggleDirection();
+        // This doesn't actually do anything
+        this.stepMillis = this.stepMillis - 100;
     }
-    this.board.aliens.forEach(function(alien) {
-      alien.move();
-    });
-    this.board.downShift = 0;
-    this.render();
+    if (!this.board.gameOver()) {
+      this.board.aliens.forEach(function(alien) {
+        alien.move();
+      });
+      this.board.downShift = 0;
+      this.render();
+    } else {
+      alert("You Lose!");
+      window.clearInterval(this.intervalId);
+    }
   };
 
-  View.prototype.updateClasses = function(aliens, className) {
+  // Need to rewrite this to accept coordinates not alien objects
+  View.prototype.updateClasses = function(coords, className) {
     this.$li.filter("." + className).removeClass();
 
-    aliens.forEach(function(alien){
-      var flatCoord = (alien.coord[0] * this.board.width) + alien.coord[1];
+    coords.forEach(function(coord){
+      var flatCoord = (coord[0] * this.board.width) + coord[1];
       this.$li.eq(flatCoord).addClass(className);
     }.bind(this));
   };
