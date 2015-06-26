@@ -110,8 +110,10 @@
   };
 
   Laser.prototype.move = function () {
-    this.coord[0] = this.coord[0] + 1;
-    window.view.render();
+    // debugger;
+    this.coord[0] = this.coord[0] - 1;
+    // debugger;
+    // window.view.render();
   };
 
   Laser.SYMBOL = "L";
@@ -131,11 +133,11 @@
     window.view.render();
   };
 
-  // Why are the lasers rendering on the same level as the ship?
   Ship.prototype.shoot = function () {
     var laserCoord = [27, this.coord[1]];
     var laser = new Laser(laserCoord, this.board);
     this.board.lasers.push(laser);
+    window.view.render();
     laser.move();
   };
 

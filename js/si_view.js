@@ -5,7 +5,7 @@
 
   var View = SI.View = function($el) {
     this.$el = $el;
-    this.stepMillis = 1500;
+    this.stepMillis = 1000;
     this.board = new SI.Board(23, 30);
     this.setupGrid();
     this.board.render();
@@ -50,6 +50,7 @@
   };
 
   // Toggle direction of the board if an alien is at a boundary.
+  // Need to clear and reset the interval on downShift as well.
   View.prototype.step = function () {
     if (this.board.alienAtEdge()) {
         this.board.toggleDirection();
@@ -60,6 +61,9 @@
       this.board.aliens.forEach(function(alien) {
         alien.move();
       });
+      this.board.lasers.forEach(function(laser) {
+        laser.move();
+      })
       this.board.downShift = 0;
       this.render();
     } else {
