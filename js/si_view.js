@@ -28,7 +28,7 @@
 
   View.prototype.handleKeyEvent = function (event) {
     if (event.keyCode === 38) {
-      this.board.shoot();
+      this.board.ship.shoot();
     } else if (event.keyCode === 37 || event.keyCode === 39) {
       this.board.ship.move(View.KEYS[event.keyCode]);
     }
@@ -36,12 +36,17 @@
 
   View.prototype.render = function () {
     var alienCoords = [];
+    var laserCoords = [];
     var shipCoord = [this.board.ship.coord];
     this.board.aliens.forEach(function (alien) {
       alienCoords.push(alien.coord);
     })
+    this.board.lasers.forEach(function (laser) {
+      laserCoords.push(laser.coord);
+    })
     this.updateClasses(alienCoords, "alien");
     this.updateClasses(shipCoord, "ship");
+    this.updateClasses(laserCoords, "laser");
   };
 
   // Toggle direction of the board if an alien is at a boundary.

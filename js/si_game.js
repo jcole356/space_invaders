@@ -29,6 +29,7 @@
     this.downShift = 0;
     this.ship = new Ship([29, 0], this);
     this.aliens = [];
+    this.lasers = [];
     //Initalize the aliens
     for (var i = 0; i < 5; i++) {
       for (var j = 6; j < 18; j++) {
@@ -103,15 +104,24 @@
     }
   };
 
+  var Laser = SI.Laser = function (coord, board) {
+    this.coord = coord;
+    this.board = board;
+  };
+
+  Laser.prototype.move = function () {
+    this.coord[0] = this.coord[0] + 1;
+    window.view.render();
+  };
+
+  Laser.SYMBOL = "L";
+
   var Ship = SI.Ship = function (coord, board) {
     this.coord = coord;
     this.board = board;
   };
 
   Ship.SYMBOL = "S";
-
-  // Probably need to force a render on each move.
-  // Need to address why ship stops moving once it reaches right boundary
 
   Ship.prototype.move = function (dir) {
     var newCoord = this.coord[1] + (1 * dir);
@@ -121,5 +131,11 @@
     window.view.render();
   };
 
+  Ship.prototype.shoot = function () {
+    var laserCoord = [25, this.coord[1]];
+    var laser = new Laser(laserCoord, this.board);
+    this.board.lasers.push(laser);
+    laser.move();
+  };
 
 })();
