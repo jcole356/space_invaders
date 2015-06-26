@@ -8,7 +8,7 @@
     this.stepMillis = 1000;
     this.board = new SI.Board(23, 30);
     this.setupGrid();
-    this.board.render();
+    // this.board.render(); Wasn't using this.
     this.render();
 
     //Need to set up an interval in here

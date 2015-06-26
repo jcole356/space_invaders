@@ -3,23 +3,32 @@
     window.SI = {};
   }
 
+  // This seems to be working.
+  Array.prototype.equals = function (array) {
+    if (this.length !== array.length) {
+      return false;
+    }
+    for (var i = 0; i < this.length; i++) {
+      if (this[i] !== array[i]) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
   // Probably going to need to make use of the coord class like in
   // snake
-
   var Alien = SI.Alien = function(coord, board) {
     this.coord = coord;
     this.board = board;
-    // this.dir = -1;
   };
 
-  // Having trouble deciding how to specify a starting direction
   Alien.prototype.move = function () {
     this.coord[0] = this.coord[0] + this.board.downShift;
     this.coord[1] = this.coord[1] + (1 * this.board.dir);
   };
 
-  // Should eventually have several different symbols for different
-  // aliens
   Alien.SYMBOL = "A";
 
   var Board = SI.Board = function(width, height) {
@@ -40,6 +49,7 @@
   };
 
   Board.BLANK_SYMBOL = ".";
+
   // Need to set the initial state of the invaders
   Board.prototype.blankGrid = function () {
     var grid = [];
@@ -78,17 +88,18 @@
     return atBottom;
   };
 
-  // Board.prototype.render = function () {
-  Board.prototype.render = function () {
-    var grid = this.blankGrid(this.width, this.height);
-    grid[this.ship.coord[0]][this.ship.coord[1]] = Ship.SYMBOL;
-    this.aliens.forEach(function (alien) {
-      grid[alien.coord[0]][alien.coord[1]] = Alien.SYMBOL;
+  Board.prototype.isOccupied = function (coord) {
+    var occupied = false;
+    this.aliens.forEach(function(alien) {
+      if (alien.coord.equals(coord)) {
+        occupied = true;
+      }
     });
+
+    return occupied;
   };
 
-  // You can't toggle every time this happens
-  // Need to determine the left most alien and only toggle on this.
+
   Board.prototype.toggleDirection = function () {
     this.dir = this.dir * -1;
     this.downShift = this.downShift + 1;
@@ -109,11 +120,15 @@
     this.board = board;
   };
 
+  // Change this to -2 from -1.
+  // Having trouble trying to figure out how to delete a laser
   Laser.prototype.move = function () {
-    // debugger;
-    this.coord[0] = this.coord[0] - 1;
-    // debugger;
-    // window.view.render();
+    var newCoord = [this.coord[0] - 1, this.coord[1]];
+    if (!this.board.isOccupied(newCoord)) {
+      this.coord[0] = this.coord[0] - 1;
+    } else {
+      debugger;
+    }
   };
 
   Laser.SYMBOL = "L";
@@ -140,5 +155,13 @@
     window.view.render();
     laser.move();
   };
-
 })();
+
+
+  // Board.prototype.render = function () {
+  //   var grid = this.blankGrid(this.width, this.height);
+  //   grid[this.ship.coord[0]][this.ship.coord[1]] = Ship.SYMBOL;
+  //   this.aliens.forEach(function (alien) {
+  //     grid[alien.coord[0]][alien.coord[1]] = Alien.SYMBOL;
+  //   });
+  // };
