@@ -50,6 +50,18 @@
 
   Board.BLANK_SYMBOL = ".";
 
+  // Lowest alien is 0 in second coord
+  // Highest alien is 23 in second coord
+  Board.prototype.alienAtEdge = function () {
+    var atEdge = false;
+    this.aliens.forEach(function(alien) {
+      if (alien.coord[1] === 0 || alien.coord[1] === 22) {
+        atEdge = true;
+      }
+    });
+    return atEdge;
+  };
+
   // Need to set the initial state of the invaders
   Board.prototype.blankGrid = function () {
     var grid = [];
@@ -65,17 +77,6 @@
     return grid;
   };
 
-  // Lowest alien is 0 in second coord
-  // Highest alien is 23 in second coord
-  Board.prototype.alienAtEdge = function () {
-    var atEdge = false;
-    this.aliens.forEach(function(alien) {
-      if (alien.coord[1] === 0 || alien.coord[1] === 22) {
-        atEdge = true;
-      }
-    });
-    return atEdge;
-  };
 
   Board.prototype.gameOver = function () {
     var atBottom = false;
@@ -99,6 +100,15 @@
     return occupied;
   };
 
+  // Removes the object from the board.  This works, need to make it
+  // work for aliens as well.
+  Board.prototype.remove = function (object) {
+    if (object instanceof SI.Laser) {
+      this.lasers.splice(this.lasers.indexOf(object), 1);
+    } else if (object instanceof SI.Alien) {
+      this.aliens.splice(this.aliens.indexOf(object), 1);
+    }
+  };
 
   Board.prototype.toggleDirection = function () {
     this.dir = this.dir * -1;
@@ -120,14 +130,14 @@
     this.board = board;
   };
 
-  // Change this to -2 from -1.
-  // Having trouble trying to figure out how to delete a laser
+  // Need a seperate interval for the speed of the bullet
+  // Need to return the alien object in order to remove that as well
   Laser.prototype.move = function () {
     var newCoord = [this.coord[0] - 1, this.coord[1]];
     if (!this.board.isOccupied(newCoord)) {
       this.coord[0] = this.coord[0] - 1;
     } else {
-      debugger;
+      this.board.remove(this);
     }
   };
 

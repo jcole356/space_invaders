@@ -40,10 +40,10 @@
     var shipCoord = [this.board.ship.coord];
     this.board.aliens.forEach(function (alien) {
       alienCoords.push(alien.coord);
-    })
+    });
     this.board.lasers.forEach(function (laser) {
       laserCoords.push(laser.coord);
-    })
+    });
     this.updateClasses(alienCoords, "alien");
     this.updateClasses(shipCoord, "ship");
     this.updateClasses(laserCoords, "laser");
@@ -51,6 +51,7 @@
 
   // Toggle direction of the board if an alien is at a boundary.
   // Need to clear and reset the interval on downShift as well.
+  // Maybe set this as an if else for downShift
   View.prototype.step = function () {
     if (this.board.alienAtEdge()) {
         this.board.toggleDirection();
@@ -63,7 +64,7 @@
       });
       this.board.lasers.forEach(function(laser) {
         laser.move();
-      })
+      });
       this.board.downShift = 0;
       this.render();
     } else {
