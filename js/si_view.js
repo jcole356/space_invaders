@@ -75,9 +75,6 @@
       this.board.aliens.forEach(function(alien) {
         alien.move();
       });
-      // this.board.lasers.forEach(function(laser) {
-      //   laser.move();
-      // });
       this.board.downShift = 0;
       this.render();
     } else {

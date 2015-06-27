@@ -115,14 +115,14 @@
   };
 
   // Currently only validates the horizontal plane for moving accross
-  // the screen
-  Board.prototype.validPosition = function (coord) {
-    if (coord >= 0 && coord <= 22) {
-      return true;
-    }else {
-      return false;
-    }
-  };
+  // the screen.  Not used as is?
+  // Board.prototype.validPosition = function (coord) {
+  //   if (coord >= 0 && coord <= 22) {
+  //     return true;
+  //   }else {
+  //     return false;
+  //   }
+  // };
 
   var Laser = SI.Laser = function (coord, board) {
     this.coord = coord;
@@ -133,7 +133,7 @@
   Laser.prototype.move = function () {
     var newCoord = [this.coord[0] - 1, this.coord[1]];
     var alien = this.board.isOccupied(newCoord);
-    if (!alien) {
+    if (!alien && this.validPosition(newCoord)) {
       this.coord[0] = this.coord[0] - 1;
     } else {
       this.board.remove(this);
@@ -142,6 +142,14 @@
   };
 
   Laser.SYMBOL = "L";
+
+  Laser.prototype.validPosition = function (coord) {
+    if (coord[0] >= 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   var Ship = SI.Ship = function (coord, board) {
     this.coord = coord;
@@ -152,7 +160,7 @@
 
   Ship.prototype.move = function (dir) {
     var newCoord = this.coord[1] + (1 * dir);
-    if (this.board.validPosition(newCoord)) {
+    if (this.validPosition(newCoord)) {
       this.coord[1] = this.coord[1] + (1 * dir);
     }
     window.view.render();
@@ -164,6 +172,14 @@
     this.board.lasers.push(laser);
     window.view.render();
     laser.move();
+  };
+
+  Ship.prototype.validPosition = function (coord) {
+    if (coord >= 0 && coord <= 22) {
+      return true;
+    }else {
+      return false;
+    }
   };
 })();
 
