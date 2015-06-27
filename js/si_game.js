@@ -129,7 +129,7 @@
     this.board = board;
   };
 
-  // Need a seperate interval for the speed of the bullet
+  // Need to remove the lasers once the reach the end of the screen
   Laser.prototype.move = function () {
     var newCoord = [this.coord[0] - 1, this.coord[1]];
     var alien = this.board.isOccupied(newCoord);

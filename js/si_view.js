@@ -12,9 +12,22 @@
     this.render();
 
     //Need to set up an interval in here
-    this.intervalId = window.setInterval(
-      this.step.bind(this),
+    // this.intervalId = window.setInterval(
+    //   this.step.bind(this),
+    //   this.stepMillis
+    // );
+
+    //Going to try to set a couple of intervals
+    // Alien interval
+    this.alienIntervalId = window.setInterval(
+      this.alienStep.bind(this),
       this.stepMillis
+    );
+
+    // Laser interval
+    this.laserIntervalId = window.setInterval(
+      this.laserStep.bind(this),
+      500
     );
 
     $(window).on("keydown", this.handleKeyEvent.bind(this));
@@ -52,7 +65,7 @@
   // Toggle direction of the board if an alien is at a boundary.
   // Need to clear and reset the interval on downShift as well.
   // Maybe set this as an if else for downShift
-  View.prototype.step = function () {
+  View.prototype.alienStep = function () {
     if (this.board.alienAtEdge()) {
         this.board.toggleDirection();
         // This doesn't actually do anything
@@ -62,15 +75,23 @@
       this.board.aliens.forEach(function(alien) {
         alien.move();
       });
-      this.board.lasers.forEach(function(laser) {
-        laser.move();
-      });
+      // this.board.lasers.forEach(function(laser) {
+      //   laser.move();
+      // });
       this.board.downShift = 0;
       this.render();
     } else {
       alert("You Lose!");
       window.clearInterval(this.intervalId);
     }
+  };
+
+  // Make this one work with lasers
+  View.prototype.laserStep = function () {
+      this.board.lasers.forEach(function(laser) {
+        laser.move();
+      });
+      this.render();
   };
 
   // Need to rewrite this to accept coordinates not alien objects
