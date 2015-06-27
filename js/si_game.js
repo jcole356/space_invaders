@@ -24,6 +24,10 @@
     this.board = board;
   };
 
+  Alien.prototype.find = function (coord) {
+    // body...
+  };
+
   Alien.prototype.move = function () {
     this.coord[0] = this.coord[0] + this.board.downShift;
     this.coord[1] = this.coord[1] + (1 * this.board.dir);
@@ -89,15 +93,18 @@
     return atBottom;
   };
 
+  // Try to make this work by returning an alien
   Board.prototype.isOccupied = function (coord) {
-    var occupied = false;
+    // var occupied = false;
+    var alienAtLocation = null;
     this.aliens.forEach(function(alien) {
       if (alien.coord.equals(coord)) {
-        occupied = true;
+        // occupied = true;
+        alienAtLocation = alien;
       }
     });
 
-    return occupied;
+    return alienAtLocation;
   };
 
   // Removes the object from the board.  This works, need to make it
@@ -134,10 +141,14 @@
   // Need to return the alien object in order to remove that as well
   Laser.prototype.move = function () {
     var newCoord = [this.coord[0] - 1, this.coord[1]];
-    if (!this.board.isOccupied(newCoord)) {
+    // Going to give this a try
+    var alien = this.board.isOccupied(newCoord);
+    // if (!this.board.isOccupied(newCoord) {
+    if (!alien) {
       this.coord[0] = this.coord[0] - 1;
     } else {
       this.board.remove(this);
+      this.board.remove(alien);
     }
   };
 
