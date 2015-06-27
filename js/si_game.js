@@ -23,8 +23,11 @@
     this.board = board;
   };
 
+  Alien.prototype.downShift = function () {
+    this.coord[0]++;
+  };
+
   Alien.prototype.move = function () {
-    this.coord[0] = this.coord[0] + this.board.downShift;
     this.coord[1] = this.coord[1] + (1 * this.board.dir);
   };
 
@@ -34,7 +37,7 @@
     this.width = width;
     this.height = height;
     this.dir = -1;
-    this.downShift = 0;
+    this.topAlienRow = 0;
     this.ship = new Ship([29, 0], this);
     this.aliens = [];
     this.lasers = [];
@@ -75,7 +78,7 @@
     return grid;
   };
 
-  // Make this work for win or lose
+  // Evaluates win or loss
   Board.prototype.gameOver = function () {
     var gameState = null;
     if (this.aliens.length === 0) {
@@ -112,7 +115,6 @@
 
   Board.prototype.toggleDirection = function () {
     this.dir = this.dir * -1;
-    this.downShift = this.downShift + 1;
   };
 
   var Laser = SI.Laser = function (coord, board) {

@@ -8,14 +8,15 @@
     this.stepMillis = 1000;
     this.board = new SI.Board(23, 30);
     this.setupGrid();
-    // this.board.render(); Wasn't using this.
     this.render();
+    // Not sure if this will work
+    this.changeInterval(this.stepMillis);
 
     // Alien interval
-    this.alienIntervalId = window.setInterval(
-      this.alienStep.bind(this),
-      this.stepMillis
-    );
+    // this.alienIntervalId = window.setInterval(
+    //   this.alienStep.bind(this),
+    //   this.stepMillis
+    // );
 
     // Laser interval
     this.laserIntervalId = window.setInterval(
@@ -30,6 +31,13 @@
     38: "Shoot",
     37: -1,
     39: 1
+  };
+
+  View.prototype.changeInterval = function (millis) {
+    this.alienIntervalId = window.setInterval(
+      this.alienStep.bind(this),
+      millis
+    );
   };
 
   View.prototype.handleKeyEvent = function (event) {
@@ -58,17 +66,25 @@
   // Toggle direction of the board if an alien is at a boundary.
   // Need to clear and reset the interval on downShift as well.
   // Maybe set this as an if else for downShift
+  // May need to make an interval reset method
   View.prototype.alienStep = function () {
     if (this.board.alienAtEdge()) {
-        this.board.toggleDirection();
-        // This doesn't actually do anything
-        this.stepMillis = this.stepMillis - 100;
-    }
-    if (!this.board.gameOver()) {
+      this.board.aliens.forEach(function(alien) {
+        alien.downShift();
+      });
+      this.render();
+      window.clearInterval(this.alienIntervalId);
+      this.board.toggleDirection();
       this.board.aliens.forEach(function(alien) {
         alien.move();
       });
-      this.board.downShift = 0;
+      // May want to add a setTimeOut to this...
+      this.stepMillis -= 100;
+      this.changeInterval(this.stepMillis);
+    } else if (!this.board.gameOver()) {
+      this.board.aliens.forEach(function(alien) {
+        alien.move();
+      });
       this.render();
     } else if (this.board.gameOver() === "lose") {
       alert("You Lose!");
