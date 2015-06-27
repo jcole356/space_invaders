@@ -64,7 +64,6 @@
   // Need to set the initial state of the invaders
   Board.prototype.blankGrid = function () {
     var grid = [];
-
     for (var i = 0; i < this.height; i++) {
       var row = [];
       for (var j = 0; j < this.width; j++) {
@@ -76,16 +75,19 @@
     return grid;
   };
 
-
+  // Make this work for win or lose
   Board.prototype.gameOver = function () {
-    var atBottom = false;
+    var gameState = null;
+    if (this.aliens.length === 0) {
+      gameState = "win";
+    }
     this.aliens.forEach(function(alien) {
       if (alien.coord[0] === 29) {
-        atBottom = true;
+        gameState = "lose";
       }
     });
 
-    return atBottom;
+    return gameState;
   };
 
   Board.prototype.isOccupied = function (coord) {
@@ -99,8 +101,7 @@
     return alienAtLocation;
   };
 
-  // Removes the object from the board.  This works, need to make it
-  // work for aliens as well.
+  // Removes the object from the board.
   Board.prototype.remove = function (object) {
     if (object instanceof SI.Laser) {
       this.lasers.splice(this.lasers.indexOf(object), 1);
@@ -113,16 +114,6 @@
     this.dir = this.dir * -1;
     this.downShift = this.downShift + 1;
   };
-
-  // Currently only validates the horizontal plane for moving accross
-  // the screen.  Not used as is?
-  // Board.prototype.validPosition = function (coord) {
-  //   if (coord >= 0 && coord <= 22) {
-  //     return true;
-  //   }else {
-  //     return false;
-  //   }
-  // };
 
   var Laser = SI.Laser = function (coord, board) {
     this.coord = coord;

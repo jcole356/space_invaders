@@ -11,13 +11,6 @@
     // this.board.render(); Wasn't using this.
     this.render();
 
-    //Need to set up an interval in here
-    // this.intervalId = window.setInterval(
-    //   this.step.bind(this),
-    //   this.stepMillis
-    // );
-
-    //Going to try to set a couple of intervals
     // Alien interval
     this.alienIntervalId = window.setInterval(
       this.alienStep.bind(this),
@@ -27,7 +20,7 @@
     // Laser interval
     this.laserIntervalId = window.setInterval(
       this.laserStep.bind(this),
-      500
+      300
     );
 
     $(window).on("keydown", this.handleKeyEvent.bind(this));
@@ -77,9 +70,12 @@
       });
       this.board.downShift = 0;
       this.render();
-    } else {
+    } else if (this.board.gameOver() === "lose") {
       alert("You Lose!");
-      window.clearInterval(this.intervalId);
+      window.clearInterval(this.alienIntervalId);
+    } else if (this.board.gameOver() === "win") {
+      alert("You Win!");
+      window.clearInterval(this.alienIntervalId);
     }
   };
 
