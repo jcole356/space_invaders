@@ -17,15 +17,10 @@
     return true;
   };
 
-  // Probably going to need to make use of the coord class like in
-  // snake
+  // May need to make use of the coord class like in snake
   var Alien = SI.Alien = function(coord, board) {
     this.coord = coord;
     this.board = board;
-  };
-
-  Alien.prototype.find = function (coord) {
-    // body...
   };
 
   Alien.prototype.move = function () {
@@ -93,13 +88,10 @@
     return atBottom;
   };
 
-  // Try to make this work by returning an alien
   Board.prototype.isOccupied = function (coord) {
-    // var occupied = false;
     var alienAtLocation = null;
     this.aliens.forEach(function(alien) {
       if (alien.coord.equals(coord)) {
-        // occupied = true;
         alienAtLocation = alien;
       }
     });
@@ -138,12 +130,9 @@
   };
 
   // Need a seperate interval for the speed of the bullet
-  // Need to return the alien object in order to remove that as well
   Laser.prototype.move = function () {
     var newCoord = [this.coord[0] - 1, this.coord[1]];
-    // Going to give this a try
     var alien = this.board.isOccupied(newCoord);
-    // if (!this.board.isOccupied(newCoord) {
     if (!alien) {
       this.coord[0] = this.coord[0] - 1;
     } else {
