@@ -12,10 +12,19 @@ html, body, figure, figcaption, ul, li, h1 {
 /*Total columns = 24*/
 /*Total rows = 24*/
 .game {
+  display: block;
+  float: left;
   margin-left: auto;
   margin-right: auto;
   /*width: 984px;*/
   background-color: black;
+}
+
+/* Clear fix */
+.clear:after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
 ul {
@@ -50,6 +59,14 @@ the standard spaces */
   border-bottom: 10px solid;
   width: 4px;
   height: 23px;
+}
+
+.score {
+  display: block;
+  float: left;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 100px;
 }
 
 .ship {

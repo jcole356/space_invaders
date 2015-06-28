@@ -86,7 +86,6 @@
     }
     // Not sure why this stopped working.
     this.aliens.forEach(function(alien) {
-      debugger;
       if (alien.coord[0] === this.height - 1) {
         gameState = "lose";
       }
@@ -131,8 +130,11 @@
     if (!alien && this.validPosition(newCoord)) {
       this.coord[0] = this.coord[0] - 1;
     } else {
+      // This could be moved to another function isHit
       this.board.remove(this);
       this.board.remove(alien);
+      window.view.score += 10;
+      $("#score").html(window.view.score);
     }
   };
 
