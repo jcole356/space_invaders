@@ -8,7 +8,7 @@
   var View = SI.View = function($el) {
     this.$el = $el;
     this.stepMillis = 1000;
-    this.board = new SI.Board(23, 18);
+    this.board = new SI.Board(24, 18);
     this.setupGrid();
     this.score = 0;
     this.render();
@@ -47,6 +47,7 @@
   View.prototype.render = function () {
     var alienCoords = [];
     var laserCoords = [];
+    var bunkerCoords = [];
     var shipCoord = [this.board.ship.coord];
     this.board.aliens.forEach(function (alien) {
       alienCoords.push(alien.coord);
@@ -54,9 +55,13 @@
     this.board.lasers.forEach(function (laser) {
       laserCoords.push(laser.coord);
     });
+    this.board.bunkerBricks.forEach(function (bunkerBrick) {
+      bunkerCoords.push(bunkerBrick.coord);
+    });
     this.updateClasses(alienCoords, "alien");
     this.updateClasses(shipCoord, "ship");
     this.updateClasses(laserCoords, "laser");
+    this.updateClasses(bunkerCoords, "bunker");
   };
 
   // May need to make an interval reset method

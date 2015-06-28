@@ -10,7 +10,9 @@
     this.topAlienRow = 0;
     this.ship = new SI.Ship([(this.height - 1), 0], this);
     this.aliens = [];
+    this.bunkerBricks = [];
     this.lasers = [];
+    this.setupBunkers();
     //Initalize the aliens
     for (var i = 0; i < 5; i++) {
       for (var j = 6; j < 18; j++) {
@@ -80,7 +82,25 @@
     }
   };
 
+  //Initalize the bunkers
+  Board.prototype.setupBunkers = function () {
+    // First bunker...
+    var bunkerCols = [4, 5, 11, 12, 18, 19];
+    for (var i = this.height - 5; i < this.height - 3; i++) {
+      for (var j = 0; j < bunkerCols.length; j++) {
+        var bunkerBrick = new BunkerBrick([i, bunkerCols[j]], this);
+        this.bunkerBricks.push(bunkerBrick);
+      }
+    }
+  };
+
   Board.prototype.toggleDirection = function () {
     this.dir = this.dir * -1;
+  };
+
+  // Class for the bunkers
+  var BunkerBrick = SI.BunkerBrick = function (coord, board) {
+    this.coord = coord;
+    this.board = board;
   };
 })();
