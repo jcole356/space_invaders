@@ -31,8 +31,6 @@
     this.coord[1] = this.coord[1] + (1 * this.board.dir);
   };
 
-  Alien.SYMBOL = "A";
-
   var Board = SI.Board = function(width, height) {
     this.width = width;
     this.height = height;
@@ -50,17 +48,13 @@
     }
   };
 
-  Board.BLANK_SYMBOL = ".";
-
-  // Lowest alien is 0 in second coord
-  // Highest alien is 23 in second coord
   Board.prototype.alienAtEdge = function () {
     var atEdge = false;
     this.aliens.forEach(function(alien) {
-      if (alien.coord[1] === 0 || alien.coord[1] === 22) {
+      if (alien.coord[1] === 0 || alien.coord[1] === (this.width - 1)) {
         atEdge = true;
       }
-    });
+    }.bind(this));
     return atEdge;
   };
 
@@ -70,7 +64,7 @@
     for (var i = 0; i < this.height; i++) {
       var row = [];
       for (var j = 0; j < this.width; j++) {
-        row.push(".");
+        row.push("");
       }
       grid.push(row);
     }
@@ -123,22 +117,21 @@
     this.board = board;
   };
 
-  // Need to remove the lasers once the reach the end of the screen
   Laser.prototype.move = function () {
     var newCoord = [this.coord[0] - 1, this.coord[1]];
     var alien = this.board.isOccupied(newCoord);
     if (!alien && this.validPosition(newCoord)) {
       this.coord[0] = this.coord[0] - 1;
-    } else {
+    } else if (alien) {
       // This could be moved to another function isHit
       this.board.remove(this);
       this.board.remove(alien);
       window.view.score += 10;
       $("#score").html(window.view.score);
+    } else {
+      this.board.remove(this);
     }
   };
-
-  Laser.SYMBOL = "L";
 
   Laser.prototype.validPosition = function (coord) {
     if (coord[0] >= 0) {
@@ -152,8 +145,6 @@
     this.coord = coord;
     this.board = board;
   };
-
-  Ship.SYMBOL = "S";
 
   Ship.prototype.move = function (dir) {
     var newCoord = this.coord[1] + (1 * dir);
@@ -179,12 +170,3 @@
     }
   };
 })();
-
-
-  // Board.prototype.render = function () {
-  //   var grid = this.blankGrid(this.width, this.height);
-  //   grid[this.ship.coord[0]][this.ship.coord[1]] = Ship.SYMBOL;
-  //   this.aliens.forEach(function (alien) {
-  //     grid[alien.coord[0]][alien.coord[1]] = Alien.SYMBOL;
-  //   });
-  // };

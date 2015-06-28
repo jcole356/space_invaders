@@ -1,3 +1,4 @@
+/*Not sure figure and figcaption need to be here*/
 html, body, figure, figcaption, ul, li, h1 {
   margin: 0;
   padding: 0;
@@ -16,7 +17,6 @@ html, body, figure, figcaption, ul, li, h1 {
   float: left;
   margin-left: auto;
   margin-right: auto;
-  /*width: 984px;*/
   background-color: black;
 }
 
