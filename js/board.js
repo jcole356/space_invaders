@@ -9,7 +9,9 @@
     this.dir = -1;
     // Am I still using this?
     this.topAlienRow = 0;
-    this.bottomAlienRow = 4;
+    // This is the starting bottom row.
+    // Probably going to get rid of this.
+    // this.bottomAlienRow = 4;
     this.ship = new SI.Ship([(this.height - 1), 0], this);
     this.aliens = [];
     this.bunkerBricks = [];
@@ -84,16 +86,23 @@
     return objectAtLocation;
   };
 
+  // This has to be fixed keep better track of bottom row aliens
   Board.prototype.randomAlien = function () {
     var bottomRowAliens = [];
+    var bottomAlienRow = 0;
     this.aliens.forEach(function(alien) {
-      if (alien.coord[0] === this.bottomAlienRow) {
+      if (alien.coord[0] > bottomAlienRow) {
+        bottomAlienRow = alien.coord[0];
+      }
+    });
+    this.aliens.forEach(function(alien) {
+      if (alien.coord[0] === bottomAlienRow) {
         bottomRowAliens.push(alien);
       }
     }.bind(this));
-    debugger;
     var randomAlienIdx = Math.floor(Math.random() * bottomRowAliens.length);
     var randomAlien = bottomRowAliens[randomAlienIdx];
+    // debugger;
     return randomAlien;
   };
 

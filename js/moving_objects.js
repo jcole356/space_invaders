@@ -24,8 +24,6 @@
 
   Alien.prototype.downShift = function () {
     this.coord[0]++;
-    // this is called for every alien
-    // this.board.bottomAlienRow++;
   };
 
   Alien.prototype.move = function () {

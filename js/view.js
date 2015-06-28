@@ -70,8 +70,8 @@
       this.board.aliens.forEach(function(alien) {
         alien.downShift();
       });
-      // Doing this here should be ok.
-      this.board.bottomAlienRow++;
+      // Need to check all aliens every time
+      // this.board.bottomAlienRow++;
       this.render();
       window.clearInterval(this.alienIntervalId);
       this.board.toggleDirection();
@@ -89,7 +89,6 @@
       if (this.alienMoveCount === 5) {
         this.alienMoveCount = 0;
         var randomAlien = this.board.randomAlien();
-        debugger;
         randomAlien.shoot();
       }
       this.board.aliens.forEach(function(alien) {
