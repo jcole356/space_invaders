@@ -38,7 +38,7 @@
     this.height = height;
     this.dir = -1;
     this.topAlienRow = 0;
-    this.ship = new Ship([29, 0], this);
+    this.ship = new Ship([(this.height - 1), 0], this);
     this.aliens = [];
     this.lasers = [];
     //Initalize the aliens
@@ -160,7 +160,7 @@
   };
 
   Ship.prototype.shoot = function () {
-    var laserCoord = [27, this.coord[1]];
+    var laserCoord = [(this.coord[0] - 1), this.coord[1]];
     var laser = new Laser(laserCoord, this.board);
     this.board.lasers.push(laser);
     window.view.render();

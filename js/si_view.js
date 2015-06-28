@@ -3,21 +3,16 @@
     window.SI = {};
   }
 
+  // Need to set variables for the board height and width so
+  // they don't need to be changed a million times
   var View = SI.View = function($el) {
     this.$el = $el;
     this.stepMillis = 1000;
-    this.board = new SI.Board(23, 30);
+    this.board = new SI.Board(23, 19);
     this.setupGrid();
     this.render();
     // Not sure if this will work
     this.changeInterval(this.stepMillis);
-
-    // Alien interval
-    // this.alienIntervalId = window.setInterval(
-    //   this.alienStep.bind(this),
-    //   this.stepMillis
-    // );
-
     // Laser interval
     this.laserIntervalId = window.setInterval(
       this.laserStep.bind(this),
@@ -63,9 +58,6 @@
     this.updateClasses(laserCoords, "laser");
   };
 
-  // Toggle direction of the board if an alien is at a boundary.
-  // Need to clear and reset the interval on downShift as well.
-  // Maybe set this as an if else for downShift
   // May need to make an interval reset method
   View.prototype.alienStep = function () {
     if (this.board.alienAtEdge()) {
@@ -79,7 +71,9 @@
         alien.move();
       });
       // May want to add a setTimeOut to this...
-      this.stepMillis -= 100;
+      // Also need to figure out how to increment the speed in a
+      // reasonable way.  May need a method that sets a max speed.
+      this.stepMillis -= 25;
       this.changeInterval(this.stepMillis);
     } else if (!this.board.gameOver()) {
       this.board.aliens.forEach(function(alien) {
