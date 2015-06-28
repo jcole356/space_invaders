@@ -12,9 +12,7 @@
     this.setupGrid();
     this.score = 0;
     this.render();
-    // Not sure if this will work
     this.changeInterval(this.stepMillis);
-    // Laser interval
     this.laserIntervalId = window.setInterval(
       this.laserStep.bind(this),
       300
@@ -64,7 +62,6 @@
     this.updateClasses(bunkerCoords, "bunker");
   };
 
-  // May need to make an interval reset method
   View.prototype.alienStep = function () {
     if (this.board.alienAtEdge()) {
       this.board.aliens.forEach(function(alien) {
@@ -95,7 +92,6 @@
     }
   };
 
-  // Make this one work with lasers
   View.prototype.laserStep = function () {
       this.board.lasers.forEach(function(laser) {
         laser.move();
@@ -103,7 +99,6 @@
       this.render();
   };
 
-  // Need to rewrite this to accept coordinates not alien objects
   View.prototype.updateClasses = function(coords, className) {
     this.$li.filter("." + className).removeClass();
 

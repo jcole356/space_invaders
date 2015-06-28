@@ -93,7 +93,7 @@
 
   //Initalize the bunkers
   Board.prototype.setupBunkers = function () {
-    // First bunker...
+    // Set bunker cols in a array
     var bunkerCols = [4, 5, 11, 12, 18, 19];
     for (var i = this.height - 5; i < this.height - 3; i++) {
       for (var j = 0; j < bunkerCols.length; j++) {

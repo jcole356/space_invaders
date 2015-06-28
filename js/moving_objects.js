@@ -3,7 +3,7 @@
     window.SI = {};
   }
 
-  // Use this to check if alien is hit.
+  // Use this to check if an object is hit.
   Array.prototype.equals = function (array) {
     if (this.length !== array.length) {
       return false;
@@ -35,13 +35,13 @@
     this.board = board;
   };
 
+  // This might need to be split into a few smaller functions
   Laser.prototype.move = function () {
     var newCoord = [this.coord[0] - 1, this.coord[1]];
     var objectAtLocation = this.board.isOccupied(newCoord);
     if (!objectAtLocation && this.validPosition(newCoord)) {
       this.coord[0] = this.coord[0] - 1;
     } else if (objectAtLocation instanceof SI.Alien) {
-      // This could be moved to another function isHit
       this.board.remove(this);
       this.board.remove(objectAtLocation);
       window.view.score += 10;

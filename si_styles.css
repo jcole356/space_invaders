@@ -5,7 +5,9 @@ html, body, figure, figcaption, ul, li, h1 {
   border: 0;
   font: inherit;
   text-align: inherit;
+  /*Need to figure this out as well*/
   width: 960px;
+  /*width: 570px;*/
   margin-left: auto;
   margin-right: auto;
 }
@@ -29,12 +31,17 @@ html, body, figure, figcaption, ul, li, h1 {
 
 ul {
   list-style: none;
+  /*width: inherit;
+  display: block;
+  float: left;*/
 }
 
 li {
   display: block;
   float: left;
   /*border: 1px solid;*/
+  /*width: 10px;
+  height: 10px;*/
   width: 40px;
   height: 40px;
   background-color: black;
@@ -44,10 +51,15 @@ li {
 the standard spaces */
 /* May need a former ship class to keep formatting the same */
 .alien {
+  /* Trying to make the grid more dynamic */
+  /*width: 40px;
+  height: 40px;*/
   background-image: url("alien.png");
 }
 
 .bunker {
+  width: 40px;
+  height: 40px;
   background-color: green;
 }
 
