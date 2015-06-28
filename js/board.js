@@ -103,6 +103,8 @@
       this.lasers.splice(this.lasers.indexOf(object), 1);
     } else if (object instanceof SI.Alien) {
       this.aliens.splice(this.aliens.indexOf(object), 1);
+    } else if (object instanceof SI.AlienLaser) {
+      this.alienLasers.splice(this.alienLasers.indexOf(object), 1);
     } else if (object instanceof BunkerBrick) {
       this.bunkerBricks.splice(this.bunkerBricks.indexOf(object), 1);
     }
