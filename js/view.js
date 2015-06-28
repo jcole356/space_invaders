@@ -9,6 +9,7 @@
     this.board = new SI.Board(24, 18);
     this.setupGrid();
     this.score = 0;
+    this.alienMoveCount = 0;
     this.render();
     this.changeInterval(this.stepMillis);
     this.laserIntervalId = window.setInterval(
@@ -42,6 +43,7 @@
   View.prototype.render = function () {
     var alienCoords = [];
     var laserCoords = [];
+    var alienLaserCoords = [];
     var bunkerCoords = [];
     var shipCoord = [this.board.ship.coord];
     this.board.aliens.forEach(function (alien) {
@@ -50,12 +52,16 @@
     this.board.lasers.forEach(function (laser) {
       laserCoords.push(laser.coord);
     });
+    this.board.alienLasers.forEach(function (alienLaser) {
+      alienLaserCoords.push(alienLaser.coord);
+    });
     this.board.bunkerBricks.forEach(function (bunkerBrick) {
       bunkerCoords.push(bunkerBrick.coord);
     });
     this.updateClasses(alienCoords, "alien");
     this.updateClasses(shipCoord, "ship");
     this.updateClasses(laserCoords, "laser");
+    this.updateClasses(alienLaserCoords, "alien-laser");
     this.updateClasses(bunkerCoords, "bunker");
   };
 
@@ -64,6 +70,8 @@
       this.board.aliens.forEach(function(alien) {
         alien.downShift();
       });
+      // Doing this here should be ok.
+      this.board.bottomAlienRow++;
       this.render();
       window.clearInterval(this.alienIntervalId);
       this.board.toggleDirection();
@@ -76,6 +84,14 @@
       this.stepMillis -= 25;
       this.changeInterval(this.stepMillis);
     } else if (!this.board.gameOver()) {
+      // Count the moves between alien shots
+      this.alienMoveCount++;
+      if (this.alienMoveCount === 5) {
+        this.alienMoveCount = 0;
+        var randomAlien = this.board.randomAlien();
+        debugger;
+        randomAlien.shoot();
+      }
       this.board.aliens.forEach(function(alien) {
         alien.move();
       });
@@ -92,6 +108,9 @@
   View.prototype.laserStep = function () {
       this.board.lasers.forEach(function(laser) {
         laser.move();
+      });
+      this.board.alienLasers.forEach(function(alienLaser) {
+        alienLaser.move();
       });
       this.render();
   };

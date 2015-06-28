@@ -7,11 +7,15 @@
     this.width = width;
     this.height = height;
     this.dir = -1;
+    // Am I still using this?
     this.topAlienRow = 0;
+    this.bottomAlienRow = 4;
     this.ship = new SI.Ship([(this.height - 1), 0], this);
     this.aliens = [];
     this.bunkerBricks = [];
     this.lasers = [];
+    this.alienLasers = [];
+    this.shipLasers = [];
     this.setupBunkers();
     //Initalize the aliens
     for (var i = 0; i < 5; i++) {
@@ -78,6 +82,19 @@
       }
     });
     return objectAtLocation;
+  };
+
+  Board.prototype.randomAlien = function () {
+    var bottomRowAliens = [];
+    this.aliens.forEach(function(alien) {
+      if (alien.coord[0] === this.bottomAlienRow) {
+        bottomRowAliens.push(alien);
+      }
+    }.bind(this));
+    debugger;
+    var randomAlienIdx = Math.floor(Math.random() * bottomRowAliens.length);
+    var randomAlien = bottomRowAliens[randomAlienIdx];
+    return randomAlien;
   };
 
   // Removes the object from the board.

@@ -24,10 +24,52 @@
 
   Alien.prototype.downShift = function () {
     this.coord[0]++;
+    // this is called for every alien
+    // this.board.bottomAlienRow++;
   };
 
   Alien.prototype.move = function () {
     this.coord[1] = this.coord[1] + (1 * this.board.dir);
+  };
+
+  // Need to be able to shoot
+  Alien.prototype.shoot = function () {
+    var laserCoord = [(this.coord[0] + 1), this.coord[1]];
+    var laser = new AlienLaser(laserCoord, this.board);
+    this.board.alienLasers.push(laser);
+    window.view.render();
+    laser.move();
+  };
+
+  var AlienLaser = SI.AlienLaser = function (coord, board) {
+    this.coord = coord;
+    this.board = board;
+  };
+
+  // This might need to be split into a few smaller functions
+  AlienLaser.prototype.move = function () {
+    var newCoord = [this.coord[0] + 1, this.coord[1]];
+    var objectAtLocation = this.board.isOccupied(newCoord);
+    if (!objectAtLocation && this.validPosition(newCoord, this.board)) {
+      this.coord[0] = this.coord[0] + 1;
+    } else if (objectAtLocation instanceof SI.Ship) {
+      this.board.remove(this);
+      this.board.remove(objectAtLocation);
+    } else if (objectAtLocation instanceof SI.BunkerBrick) {
+      objectAtLocation.hits++;
+      this.board.remove(this);
+      objectAtLocation.remove();
+    } else {
+      this.board.remove(this);
+    }
+  };
+
+  AlienLaser.prototype.validPosition = function (coord, board) {
+    if (coord[0] <= (board.height - 1)) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   var Laser = SI.Laser = function (coord, board) {
