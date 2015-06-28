@@ -3,8 +3,6 @@
     window.SI = {};
   }
 
-  // Need to set variables for the board height and width so
-  // they don't need to be changed a million times
   var View = SI.View = function($el) {
     this.$el = $el;
     this.stepMillis = 1000;
@@ -17,7 +15,6 @@
       this.laserStep.bind(this),
       300
     );
-
     $(window).on("keydown", this.handleKeyEvent.bind(this));
   };
 
