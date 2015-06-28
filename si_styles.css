@@ -5,7 +5,7 @@ html, body, figure, figcaption, ul, li, h1 {
   border: 0;
   font: inherit;
   text-align: inherit;
-  width: 1024px;
+  width: 960px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -34,7 +34,7 @@ ul {
 li {
   display: block;
   float: left;
-  border: 1px solid;
+  /*border: 1px solid;*/
   width: 40px;
   height: 40px;
   background-color: black;
@@ -60,7 +60,7 @@ the standard spaces */
   border-left: 18px solid;
   border-right: 18px solid;
   border-top: 9px solid;
-  border-bottom: 10px solid;
+  border-bottom: 8px solid;
   width: 4px;
   height: 23px;
 }

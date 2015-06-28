@@ -37,15 +37,19 @@
 
   Laser.prototype.move = function () {
     var newCoord = [this.coord[0] - 1, this.coord[1]];
-    var alien = this.board.isOccupied(newCoord);
-    if (!alien && this.validPosition(newCoord)) {
+    var objectAtLocation = this.board.isOccupied(newCoord);
+    if (!objectAtLocation && this.validPosition(newCoord)) {
       this.coord[0] = this.coord[0] - 1;
-    } else if (alien) {
+    } else if (objectAtLocation instanceof SI.Alien) {
       // This could be moved to another function isHit
       this.board.remove(this);
-      this.board.remove(alien);
+      this.board.remove(objectAtLocation);
       window.view.score += 10;
       $("#score").html(window.view.score);
+    } else if (objectAtLocation instanceof SI.BunkerBrick) {
+      objectAtLocation.hits++;
+      this.board.remove(this);
+      objectAtLocation.remove();
     } else {
       this.board.remove(this);
     }

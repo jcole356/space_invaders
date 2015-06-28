@@ -62,15 +62,22 @@
     return gameState;
   };
 
+  // Need to generalize this for bunkers or aliens
   Board.prototype.isOccupied = function (coord) {
-    var alienAtLocation = null;
+    var objectAtLocation = null;
     this.aliens.forEach(function(alien) {
       if (alien.coord.equals(coord)) {
-        alienAtLocation = alien;
+        objectAtLocation = alien;
+        return objectAtLocation;
       }
     });
-
-    return alienAtLocation;
+    this.bunkerBricks.forEach(function(bunkerBrick) {
+      if (bunkerBrick.coord.equals(coord)) {
+        objectAtLocation = bunkerBrick;
+        return objectAtLocation;
+      }
+    });
+    return objectAtLocation;
   };
 
   // Removes the object from the board.
@@ -79,6 +86,8 @@
       this.lasers.splice(this.lasers.indexOf(object), 1);
     } else if (object instanceof SI.Alien) {
       this.aliens.splice(this.aliens.indexOf(object), 1);
+    } else if (object instanceof BunkerBrick) {
+      this.bunkerBricks.splice(this.bunkerBricks.indexOf(object), 1);
     }
   };
 
@@ -102,5 +111,14 @@
   var BunkerBrick = SI.BunkerBrick = function (coord, board) {
     this.coord = coord;
     this.board = board;
+    // Need to track how many times the bunker gets hit
+    // 4 hits should break a brick
+    this.hits = 0;
+  };
+
+  BunkerBrick.prototype.remove = function () {
+    if (this.hits === 4) {
+      this.board.remove(this);
+    }
   };
 })();
