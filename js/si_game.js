@@ -3,7 +3,7 @@
     window.SI = {};
   }
 
-  // This seems to be working.
+  // I don't think I'm even using this anymore
   Array.prototype.equals = function (array) {
     if (this.length !== array.length) {
       return false;
@@ -84,11 +84,13 @@
     if (this.aliens.length === 0) {
       gameState = "win";
     }
+    // Not sure why this stopped working.
     this.aliens.forEach(function(alien) {
-      if (alien.coord[0] === 29) {
+      debugger;
+      if (alien.coord[0] === this.height - 1) {
         gameState = "lose";
       }
-    });
+    }.bind(this));
 
     return gameState;
   };

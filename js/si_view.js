@@ -8,8 +8,9 @@
   var View = SI.View = function($el) {
     this.$el = $el;
     this.stepMillis = 1000;
-    this.board = new SI.Board(23, 19);
+    this.board = new SI.Board(23, 18);
     this.setupGrid();
+    this.score = 0;
     this.render();
     // Not sure if this will work
     this.changeInterval(this.stepMillis);
