@@ -45,7 +45,10 @@
     var laserCoords = [];
     var alienLaserCoords = [];
     var bunkerCoords = [];
-    var shipCoord = [this.board.ship.coord];
+    if (this.board.ship) {
+      var shipCoord = [this.board.ship.coord];
+      this.updateClasses(shipCoord, "ship");
+    }
     this.board.aliens.forEach(function (alien) {
       alienCoords.push(alien.coord);
     });
@@ -59,7 +62,6 @@
       bunkerCoords.push(bunkerBrick.coord);
     });
     this.updateClasses(alienCoords, "alien");
-    this.updateClasses(shipCoord, "ship");
     this.updateClasses(laserCoords, "laser");
     this.updateClasses(alienLaserCoords, "alien-laser");
     this.updateClasses(bunkerCoords, "bunker");
@@ -68,7 +70,15 @@
   // May need to split this up and change the order.  The game should be
   // evaluated before making the next move.
   View.prototype.alienStep = function () {
-    if (this.board.alienAtEdge()) {
+    if (this.board.gameOver() === "lose") {
+      alert("You Lose!");
+      window.clearInterval(this.alienIntervalId);
+      window.clearInterval(this.laserIntervalId);
+    } else if (this.board.gameOver() === "win") {
+      alert("You Win!");
+      window.clearInterval(this.alienIntervalId);
+      window.clearInterval(this.laserIntervalId);
+    } else if (this.board.alienAtEdge()) {
       this.board.aliens.forEach(function(alien) {
         alien.downShift();
       });
@@ -95,12 +105,6 @@
         alien.move();
       });
       this.render();
-    } else if (this.board.gameOver() === "lose") {
-      alert("You Lose!");
-      window.clearInterval(this.alienIntervalId);
-    } else if (this.board.gameOver() === "win") {
-      alert("You Win!");
-      window.clearInterval(this.alienIntervalId);
     }
   };
 
