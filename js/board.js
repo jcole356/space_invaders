@@ -16,10 +16,27 @@
     this.alienLasers = [];
     this.shipLasers = [];
     this.setupBunkers();
-    //Initalize the aliens
-    for (var i = 0; i < 5; i++) {
+    // Initalize the aliens
+    // Alien A style first
+    for (var i = 0; i < 1; i++) {
       for (var j = 6; j < 18; j++) {
         var alien = new SI.AlienA([i, j], this);
+        this.aliens.push(alien);
+      }
+    }
+
+    // Alien B style second
+    for (i; i < 3; i++) {
+      for (var j = 6; j < 18; j++) {
+        var alien = new SI.AlienB([i, j], this);
+        this.aliens.push(alien);
+      }
+    }
+
+    // Alien C style third
+    for (i; i < 5; i++) {
+      for (var j = 6; j < 18; j++) {
+        var alien = new SI.AlienC([i, j], this);
         this.aliens.push(alien);
       }
     }

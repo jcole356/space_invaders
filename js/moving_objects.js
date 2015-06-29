@@ -51,6 +51,20 @@
 
   AlienA.inherits(Alien);
 
+  var AlienB = SI.AlienB = function (coord, board) {
+    this.coord = coord;
+    this.board = board;
+  };
+
+  AlienB.inherits(Alien);
+
+  var AlienC = SI.AlienC = function (coord, board) {
+    this.coord = coord;
+    this.board = board;
+  };
+
+  AlienC.inherits(Alien);
+
   var AlienLaser = SI.AlienLaser = function (coord, board) {
     this.coord = coord;
     this.board = board;
