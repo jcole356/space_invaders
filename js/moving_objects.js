@@ -17,9 +17,14 @@
     return true;
   };
 
-  var Alien = SI.Alien = function(coord, board) {
-    this.coord = coord;
-    this.board = board;
+  Function.prototype.inherits = function inherits(ParentClass) {
+    function Surrogate () {};
+    Surrogate.prototype = ParentClass.prototype;
+    this.prototype = new Surrogate();
+    this.prototype.constructor = this;
+  };
+
+  var Alien = SI.Alien = function() {
   };
 
   Alien.prototype.downShift = function () {
@@ -38,6 +43,13 @@
     window.view.render();
     laser.move();
   };
+
+  var AlienA = SI.AlienA = function (coord, board) {
+    this.coord = coord;
+    this.board = board;
+  };
+
+  AlienA.inherits(Alien);
 
   var AlienLaser = SI.AlienLaser = function (coord, board) {
     this.coord = coord;

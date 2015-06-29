@@ -19,7 +19,7 @@
     //Initalize the aliens
     for (var i = 0; i < 5; i++) {
       for (var j = 6; j < 18; j++) {
-        var alien = new SI.Alien([i, j], this);
+        var alien = new SI.AlienA([i, j], this);
         this.aliens.push(alien);
       }
     }
