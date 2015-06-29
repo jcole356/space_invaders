@@ -43,10 +43,18 @@ li {
   background-image: url("alien.png");
 }
 
+.alien_b {
+  background-image: url("alien_b.png");
+}
+
+.alien_c {
+  background-image: url("alien_c.png");
+}
+
 .bunker {
   width: 40px;
   height: 40px;
-  background-color: green;
+  background-color: #00FC00;
 }
 
 .header {
@@ -54,13 +62,20 @@ li {
 }
 
 .laser, .alien-laser {
-  background-color: white;
   border-left: 18px solid;
   border-right: 18px solid;
   border-top: 9px solid;
   border-bottom: 8px solid;
   width: 4px;
   height: 23px;
+}
+
+.laser {
+  background-color: white;
+}
+
+.alien-laser {
+  background-color: red;
 }
 
 .score {

@@ -14,7 +14,7 @@
     this.changeInterval(this.stepMillis);
     this.laserIntervalId = window.setInterval(
       this.laserStep.bind(this),
-      300
+      200
     );
     $(window).on("keydown", this.handleKeyEvent.bind(this));
   };
