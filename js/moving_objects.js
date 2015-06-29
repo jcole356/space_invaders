@@ -37,7 +37,8 @@
 
   // Need to be able to shoot
   Alien.prototype.shoot = function () {
-    var laserCoord = [(this.coord[0] + 1), this.coord[1]];
+    // Change this to start at the same location as the alien
+    var laserCoord = [(this.coord[0]), this.coord[1]];
     var laser = new AlienLaser(laserCoord, this.board);
     this.board.alienLasers.push(laser);
     window.view.render();
