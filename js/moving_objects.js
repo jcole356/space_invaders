@@ -18,7 +18,7 @@
   };
 
   Function.prototype.inherits = function inherits(ParentClass) {
-    function Surrogate () {};
+    function Surrogate () {}
     Surrogate.prototype = ParentClass.prototype;
     this.prototype = new Surrogate();
     this.prototype.constructor = this;

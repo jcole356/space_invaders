@@ -20,22 +20,22 @@
     // Alien A style first
     for (var i = 0; i < 1; i++) {
       for (var j = 6; j < 18; j++) {
-        var alien = new SI.AlienA([i, j], this);
-        this.aliens.push(alien);
+        var alienA = new SI.AlienA([i, j], this);
+        this.aliens.push(alienA);
       }
     }
     // Alien B style second
     for (i; i < 3; i++) {
-      for (var j = 6; j < 18; j++) {
-        var alien = new SI.AlienB([i, j], this);
-        this.aliens.push(alien);
+      for (var k = 6; k < 18; k++) {
+        var alienB = new SI.AlienB([i, k], this);
+        this.aliens.push(alienB);
       }
     }
     // Alien C style third
     for (i; i < 5; i++) {
-      for (var j = 6; j < 18; j++) {
-        var alien = new SI.AlienC([i, j], this);
-        this.aliens.push(alien);
+      for (var l = 6; l < 18; l++) {
+        var alienC = new SI.AlienC([i, l], this);
+        this.aliens.push(alienC);
       }
     }
   };

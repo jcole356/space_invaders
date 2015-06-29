@@ -125,7 +125,6 @@
     aliens.forEach(function(alien) {
       var flatCoord = (alien.coord[0] * this.board.width) + alien.coord[1];
       this.$li.eq(flatCoord).addClass(alien.class);
-      debugger;
     }.bind(this));
   };
 
