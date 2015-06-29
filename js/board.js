@@ -24,7 +24,6 @@
         this.aliens.push(alien);
       }
     }
-
     // Alien B style second
     for (i; i < 3; i++) {
       for (var j = 6; j < 18; j++) {
@@ -32,7 +31,6 @@
         this.aliens.push(alien);
       }
     }
-
     // Alien C style third
     for (i; i < 5; i++) {
       for (var j = 6; j < 18; j++) {

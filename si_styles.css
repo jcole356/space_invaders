@@ -39,15 +39,15 @@ li {
   background-color: black;
 }
 
-.alien {
-  background-image: url("alien.png");
+.alien-a {
+  background-image: url("alien_a.png");
 }
 
-.alien_b {
+.alien-b {
   background-image: url("alien_b.png");
 }
 
-.alien_c {
+.alien-c {
   background-image: url("alien_c.png");
 }
 

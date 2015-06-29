@@ -41,7 +41,7 @@
   };
 
   View.prototype.render = function () {
-    var alienCoords = [];
+    // var alienCoords = [];
     var laserCoords = [];
     var alienLaserCoords = [];
     var bunkerCoords = [];
@@ -49,9 +49,9 @@
       var shipCoord = [this.board.ship.coord];
       this.updateClasses(shipCoord, "ship");
     }
-    this.board.aliens.forEach(function (alien) {
-      alienCoords.push(alien.coord);
-    });
+    // this.board.aliens.forEach(function (alien) {
+    //   alienCoords.push(alien.coord);
+    // });
     this.board.lasers.forEach(function (laser) {
       laserCoords.push(laser.coord);
     });
@@ -61,7 +61,7 @@
     this.board.bunkerBricks.forEach(function (bunkerBrick) {
       bunkerCoords.push(bunkerBrick.coord);
     });
-    this.updateClasses(alienCoords, "alien");
+    this.updateAlienClasses(this.board.aliens);
     this.updateClasses(laserCoords, "laser");
     this.updateClasses(alienLaserCoords, "alien-laser");
     this.updateClasses(bunkerCoords, "bunker");
@@ -116,6 +116,17 @@
         alienLaser.move();
       });
       this.render();
+  };
+
+  View.prototype.updateAlienClasses = function(aliens) {
+    this.$li.filter(".alien-a").removeClass();
+    this.$li.filter(".alien-b").removeClass();
+    this.$li.filter(".alien-c").removeClass();
+    aliens.forEach(function(alien) {
+      var flatCoord = (alien.coord[0] * this.board.width) + alien.coord[1];
+      this.$li.eq(flatCoord).addClass(alien.class);
+      debugger;
+    }.bind(this));
   };
 
   View.prototype.updateClasses = function(coords, className) {
