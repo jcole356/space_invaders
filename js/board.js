@@ -9,9 +9,6 @@
     this.dir = -1;
     // Am I still using this?
     this.topAlienRow = 0;
-    // This is the starting bottom row.
-    // Probably going to get rid of this.
-    // this.bottomAlienRow = 4;
     this.ship = new SI.Ship([(this.height - 1), 0], this);
     this.aliens = [];
     this.bunkerBricks = [];
@@ -38,7 +35,6 @@
     return atEdge;
   };
 
-  // Need to set the initial state of the invaders
   Board.prototype.blankGrid = function () {
     var grid = [];
     for (var i = 0; i < this.height; i++) {
@@ -58,7 +54,6 @@
     if (this.aliens.length === 0) {
       gameState = "win";
     }
-    // Not sure why this stopped working.
     this.aliens.forEach(function(alien) {
       if (alien.coord[0] === this.height - 1) {
         gameState = "lose";
@@ -102,7 +97,6 @@
     }.bind(this));
     var randomAlienIdx = Math.floor(Math.random() * bottomRowAliens.length);
     var randomAlien = bottomRowAliens[randomAlienIdx];
-    // debugger;
     return randomAlien;
   };
 

@@ -70,8 +70,6 @@
       this.board.aliens.forEach(function(alien) {
         alien.downShift();
       });
-      // Need to check all aliens every time
-      // this.board.bottomAlienRow++;
       this.render();
       window.clearInterval(this.alienIntervalId);
       this.board.toggleDirection();

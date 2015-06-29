@@ -119,10 +119,9 @@
   // Need to restrict lasers to one at a time
   Ship.prototype.shoot = function () {
     if (this.board.lasers.length === 0) {
-      var laserCoord = [(this.coord[0] - 1), this.coord[1]];
+      var laserCoord = [(this.coord[0]), this.coord[1]];
       var laser = new Laser(laserCoord, this.board);
       this.board.lasers.push(laser);
-      window.view.render();
       laser.move();
     }
   };
