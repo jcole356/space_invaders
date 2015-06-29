@@ -51,6 +51,7 @@
     if (!objectAtLocation && this.validPosition(newCoord, this.board)) {
       this.coord[0] = this.coord[0] + 1;
     } else if (objectAtLocation instanceof SI.Ship) {
+      // Need to end the game on this condition.
       this.board.remove(this);
       this.board.remove(objectAtLocation);
     } else if (objectAtLocation instanceof SI.BunkerBrick) {

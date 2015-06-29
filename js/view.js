@@ -65,6 +65,8 @@
     this.updateClasses(bunkerCoords, "bunker");
   };
 
+  // May need to split this up and change the order.  The game should be
+  // evaluated before making the next move.
   View.prototype.alienStep = function () {
     if (this.board.alienAtEdge()) {
       this.board.aliens.forEach(function(alien) {

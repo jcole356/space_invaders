@@ -55,7 +55,7 @@
       gameState = "win";
     }
     this.aliens.forEach(function(alien) {
-      if (alien.coord[0] === this.height - 1) {
+      if (alien.coord[0] === this.height - 1 || this.ship === null) {
         gameState = "lose";
       }
     }.bind(this));
@@ -78,6 +78,10 @@
         return objectAtLocation;
       }
     });
+    if (this.ship.coord.equals(coord)) {
+      objectAtLocation = this.ship;
+      return objectAtLocation;
+    }
     return objectAtLocation;
   };
 
@@ -110,6 +114,8 @@
       this.alienLasers.splice(this.alienLasers.indexOf(object), 1);
     } else if (object instanceof BunkerBrick) {
       this.bunkerBricks.splice(this.bunkerBricks.indexOf(object), 1);
+    } else if (object instanceof SI.Ship) {
+      this.ship = null;
     }
   };
 
