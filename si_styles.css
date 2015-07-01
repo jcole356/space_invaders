@@ -10,6 +10,14 @@ html, body, figure, figcaption, ul, li, h1 {
   margin-right: auto;
 }
 
+/*Intro Page Styles*/
+.logo {
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+}
+
+/*Game styles*/
 /*Total columns = 24*/
 /*Total rows = 24*/
 .game {
@@ -40,15 +48,15 @@ li {
 }
 
 .alien-a {
-  background-image: url("alien_a.png");
+  background-image: url("images/alien_a.png");
 }
 
 .alien-b {
-  background-image: url("alien_b.png");
+  background-image: url("images/alien_b.png");
 }
 
 .alien-c {
-  background-image: url("alien_c.png");
+  background-image: url("images/alien_c.png");
 }
 
 .bunker {
@@ -87,6 +95,6 @@ li {
 }
 
 .ship {
-  background-image: url("ship.png");
+  background-image: url("images/ship.png");
   background-repeat: no-repeat;
 }
