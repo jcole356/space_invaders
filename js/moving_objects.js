@@ -36,8 +36,8 @@
   };
 
   // Need to be able to shoot
+  // Change this to start at the same location as the alien
   Alien.prototype.shoot = function () {
-    // Change this to start at the same location as the alien
     var laserCoord = [(this.coord[0]), this.coord[1]];
     var laser = new AlienLaser(laserCoord, this.board);
     this.board.alienLasers.push(laser);
@@ -81,7 +81,6 @@
     if (!objectAtLocation && this.validPosition(newCoord, this.board)) {
       this.coord[0] = this.coord[0] + 1;
     } else if (objectAtLocation instanceof SI.Ship) {
-      // Need to end the game on this condition.
       this.board.remove(this);
       this.board.remove(objectAtLocation);
     } else if (objectAtLocation instanceof SI.BunkerBrick) {

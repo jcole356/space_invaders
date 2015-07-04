@@ -41,7 +41,6 @@
   };
 
   View.prototype.render = function () {
-    // var alienCoords = [];
     var laserCoords = [];
     var alienLaserCoords = [];
     var bunkerCoords = [];
@@ -49,9 +48,6 @@
       var shipCoord = [this.board.ship.coord];
       this.updateClasses(shipCoord, "ship");
     }
-    // this.board.aliens.forEach(function (alien) {
-    //   alienCoords.push(alien.coord);
-    // });
     this.board.lasers.forEach(function (laser) {
       laserCoords.push(laser.coord);
     });
@@ -88,9 +84,6 @@
       this.board.aliens.forEach(function(alien) {
         alien.move();
       });
-      // May want to add a setTimeOut to this...
-      // Also need to figure out how to increment the speed in a
-      // reasonable way.  May need a method that sets a max speed.
       this.stepMillis -= 25;
       this.changeInterval(this.stepMillis);
     } else if (!this.board.gameOver()) {
