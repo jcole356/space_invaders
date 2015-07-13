@@ -41,6 +41,9 @@ html, body, figure, figcaption, ul, li, h1 {
   width: 960px;
   margin-left: auto;
   margin-right: auto;
+  background-image: url("images/sfsky.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .controls {
@@ -50,6 +53,7 @@ html, body, figure, figcaption, ul, li, h1 {
   padding-left: 10px;
   font-family: sans-serif;
   font-size: 20px;
+  color: white;
 }
 
 .game {
@@ -75,7 +79,6 @@ li {
   float: left;
   width: 30px;
   height: 30px;
-  background-color: black;
 }
 
 .alien-a {
@@ -97,10 +100,10 @@ li {
 }
 
 .laser, .alien-laser {
-  border-left: 13px solid;
-  border-right: 13px solid;
-  border-top: 4px solid;
-  border-bottom: 3px solid;
+  margin-left: 13px;
+  margin-right: 13px;
+  margin-top: 4px;
+  margin-bottom: 3px;
   width: 4px;
   height: 23px;
 }
@@ -120,6 +123,7 @@ li {
   margin-bottom: 0px;
   width: 100px;
   font-family: sans-serif;
+  color: white;
 }
 
 .ship {
