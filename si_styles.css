@@ -38,22 +38,32 @@ html, body, figure, figcaption, ul, li, h1 {
 /*Total columns = 24*/
 /*Total rows = 24*/
 .container {
-  width: 720px;
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.controls {
+  width: 180px;
+  display: block;
+  float: left;
+  padding-left: 10px;
+  font-family: sans-serif;
+  font-size: 20px;
 }
 
 .game {
   display: block;
   float: left;
-  margin-left: auto;
-  margin-right: auto;
   background-color: black;
+  width: 720px;
 }
 
-/* Clear fix */
-.clear:after {
-  content: "";
-  clear: both;
-  display: table;
+.game-header {
+  display: block;
+  float: left;
+  height: 40px;
+  width: inherit;
 }
 
 ul {
@@ -86,10 +96,6 @@ li {
   background-color: #00FC00;
 }
 
-.header {
-  height: 40px;
-}
-
 .laser, .alien-laser {
   border-left: 13px solid;
   border-right: 13px solid;
@@ -113,6 +119,7 @@ li {
   margin-top: 0px;
   margin-bottom: 0px;
   width: 100px;
+  font-family: sans-serif;
 }
 
 .ship {
