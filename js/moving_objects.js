@@ -49,6 +49,7 @@
     this.coord = coord;
     this.board = board;
     this.class = "alien-a";
+    this.points = 30;
   };
 
   AlienA.inherits(Alien);
@@ -57,6 +58,7 @@
     this.coord = coord;
     this.board = board;
     this.class = "alien-b";
+    this.points = 20;
   };
 
   AlienB.inherits(Alien);
@@ -65,6 +67,7 @@
     this.coord = coord;
     this.board = board;
     this.class = "alien-c";
+    this.points = 10;
   };
 
   AlienC.inherits(Alien);
@@ -112,9 +115,9 @@
     if (!objectAtLocation && this.validPosition(newCoord)) {
       this.coord[0] = this.coord[0] - 1;
     } else if (objectAtLocation instanceof SI.Alien) {
+      window.view.score += objectAtLocation.points;
       this.board.remove(this);
       this.board.remove(objectAtLocation);
-      window.view.score += 10;
       $("#score").html(window.view.score);
     } else if (objectAtLocation instanceof SI.BunkerBrick) {
       objectAtLocation.hits++;
