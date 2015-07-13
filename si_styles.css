@@ -41,7 +41,7 @@ html, body, figure, figcaption, ul, li, h1 {
   width: 960px;
   margin-left: auto;
   margin-right: auto;
-  background-image: url("images/sf-sky2.jpg");
+  background-image: url("images/space.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -59,7 +59,7 @@ html, body, figure, figcaption, ul, li, h1 {
 .game {
   display: block;
   float: left;
-  /*background-color: black;*/
+  background-color: black;
   width: 720px;
 }
 
@@ -82,15 +82,15 @@ li {
 }
 
 .alien-a {
-  background-image: url("images/alien_aa.png");
+  background-image: url("images/alien_a.png");
 }
 
 .alien-b {
-  background-image: url("images/alien_bb.png");
+  background-image: url("images/alien_b.png");
 }
 
 .alien-c {
-  background-image: url("images/alien_cc.png");
+  background-image: url("images/alien_c.png");
 }
 
 .bunker {
