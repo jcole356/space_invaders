@@ -7,8 +7,6 @@
     this.width = width;
     this.height = height;
     this.dir = -1;
-    // Am I still using this?
-    this.topAlienRow = 0;
     this.ship = new SI.Ship([(this.height - 1), 0], this);
     this.aliens = [];
     this.bunkerBricks = [];
@@ -47,6 +45,7 @@
         atEdge = true;
       }
     }.bind(this));
+
     return atEdge;
   };
 
@@ -136,7 +135,7 @@
 
   //Initalize the bunkers
   Board.prototype.setupBunkers = function () {
-    // Set bunker cols in a array
+    // Set bunker cols in an array
     var bunkerCols = [4, 5, 11, 12, 18, 19];
     for (var i = this.height - 5; i < this.height - 3; i++) {
       for (var j = 0; j < bunkerCols.length; j++) {
@@ -151,11 +150,11 @@
   };
 
   // Class for the bunkers
+  // Need to track how many times the bunker gets hit
+  // 4 hits should break a brick
   var BunkerBrick = SI.BunkerBrick = function (coord, board) {
     this.coord = coord;
     this.board = board;
-    // Need to track how many times the bunker gets hit
-    // 4 hits should break a brick
     this.hits = 0;
   };
 

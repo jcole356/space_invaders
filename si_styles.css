@@ -1,4 +1,3 @@
-/*Not sure figure and figcaption need to be here*/
 html, body, figure, figcaption, ul, li, h1 {
   margin: 0;
   padding: 0;
@@ -15,6 +14,13 @@ html, body, figure, figcaption, ul, li, h1 {
   margin-right: auto;
   width: 960px;
   text-align: center;
+  transition-property: opacity;
+  transition-duration: 4s;
+  opacity: 1;
+}
+
+.preload {
+  opacity: 0;
 }
 
 #game {
