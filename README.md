@@ -6,7 +6,7 @@
 
 ![screenshot]
 
-[screenshot]: images_invaders_demo.gif
+[screenshot]: space_invaders_demo.gif
 
 ## Description
 Space Invaders is a remake of the classic arcade game.  The goal of the
